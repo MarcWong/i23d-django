@@ -75,53 +75,57 @@
 
 ## 2.2 数据库
 
-- [ ] 用户 USER
+- [x] 表的创建(用户、重建任务) (0726 init model)
+
+- 用户　USER
 
 |属性|说明|数据类型|
 |---|---|---|
 |user_id|主键|uuid|
-|class|用户类型(0被封禁用户,1正常用户)|int|
+|user_type|用户类型(0被封禁用户,1正常用户)|int|
 |name|姓名|string|
+|phone|手机号|string|
 |email|邮箱|email|
 |passwd|密码|string|
-|profile|个人头像|string|
 |school|学校|string|
 
-- [ ] 重建任务 RECON
+- 重建任务 RECON
 
 |属性|说明|数据类型|
 |---|---|---|
 |recon_id|主键|uuid|
 |user_id|创建者id|uuid|
-|progress|重建进度(0->1)|double|
-|image_path|图片所在路径|string|
-|feature_isdone|特征点步骤是否完成|boolean|
-|feature_starttime|特征点步骤开始时间|timestamp|
-|feature_endtime|特征点步骤结束时间|timestamp|
+|recon_progress|重建进度(0->1)|float|
+|image_path|图片路径|string|
+|feature_isdone|特征提取是否完成|boolean|
+|feature_starttime|特征提取开始时间|timestamp|
+|feature_endtime|特征提取结束时间|timestamp|
 |feature_number|特征点数目|int|
 |feature_path|特征点存储路径|string|
-|matching_isdone|匹配步骤是否完成|boolean|
-|matching_starttime|匹配步骤开始时间|timestamp|
-|matching_endtime|匹配步骤结束时间|timestamp|
-|matching_number|匹配点数目|int|
-|matching_path|匹配点存储路径|string|
-|sfm_isdone|稀疏重建步骤是否完成|boolean|
-|sfm_starttime|稀疏重建步骤开始时间|timestamp|
-|sfm_endtime|稀疏重建步骤结束时间|timestamp|
-|sfm_number|稀疏重建点数目|int|
+|matching_isdone|匹配是否完成|boolean|
+|matching_starttime|匹配开始时间|timestamp|
+|matching_endtime|匹配结束时间|timestamp|
+|matching_number|匹配数目|int|
+|matching_path|匹配存储路径|string|
+|sfm_isdone|稀疏重建是否完成|boolean|
+|sfm_starttime|稀疏重建开始时间|timestamp|
+|sfm_endtime|稀疏重建结束时间|timestamp|
+|sfm_number|稀疏点数目|int|
 |sfm_path|稀疏重建存储路径|string|
-|mvs_isdone|稠密重建步骤是否完成|boolean|
-|mvs_starttime|稠密重建步骤开始时间|timestamp|
-|mvs_endtime|稠密重建步骤结束时间|timestamp|
-|mvs_number|稠密重建点数目|int|
+|mvs_isdone|稠密重建是否完成|boolean|
+|mvs_starttime|稠密重建开始时间|timestamp|
+|mvs_endtime|稠密重建结束时间|timestamp|
+|mvs_number|稠密点数目|int|
 |mvs_path|稠密重建存储路径|string|
-|texture_isdone|纹理重建步骤是否完成|boolean|
-|texture_starttime|纹理重建步骤开始时间|timestamp|
-|texture_endtime|纹理重建步骤结束时间|timestamp|
+|texture_isdone|纹理重建是否完成|boolean|
+|texture_starttime|纹理重建开始时间|timestamp|
+|texture_endtime|纹理重建结束时间|timestamp|
 |texture_number|纹理重建面片数目|int|
 |texture_path|纹理重建存储路径|string|
 
 ## 2.３ 前后端通讯接口
+
+- [ ] 路由重构，将静态页面改为动态
 
 ### 用户相关
 
