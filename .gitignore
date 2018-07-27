@@ -105,7 +105,11 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# database
+db.sqlite3
+
 # other files
+
 TODOS.html
 TODOS.png
 TODOS.jpeg
@@ -115,3 +119,4 @@ README.html
 README.png
 README.jpeg
 README.pdf
+

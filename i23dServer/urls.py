@@ -19,7 +19,13 @@ from i23d import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    #index page
     url(r'^index/', views.index),
+    #user login&register
+    url(r'^login/', views.login),
+    url(r'^register/', views.register),
+    url(r'^logout/', views.logout),
+    #3D Viewers
     url(r'^obj/', views.obj),
     url(r'^ply/', views.ply),
 ]

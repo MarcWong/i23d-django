@@ -2,39 +2,34 @@
 from __future__ import unicode_literals
 
 from django.db import models
+import uuid
 
-
-class BaseModel(models.Model):
-
-    class Meta:
-        abstract = True
-
-    def to_json(self):
-        return dict([(attr, getattr(self, attr)) for attr in [f.name for f in self._meta.fields]])
-
-class User(BaseModel):
-    user_id = models.uuid(verbose_name='用户id')
-    user_type = (
+class User(models.Model):
+    user_id = models.AutoField(primary_key=True, editable=False, unique=True, verbose_name='用户id')
+    user_type_enums = (
         (0,'被封禁用户'),
-        (1,'正常用户'')
+        (1,'正常用户')
     )
 
-    name = models.CharField(max_length=256, verbose_name='用户名')
-    phone = models.CharField(max_length=32, verbose_name='手机号')
-    email = models.EmailField(verbose_name='邮箱')
-    passwd = models.CharField(max_length=256, verbose_name='密码'')
+    user_type = models.SmallIntegerField(choices=user_type_enums, default=1, verbose_name='用户类型')
+    name = models.CharField(max_length=128, unique=True, verbose_name='用户名')
+    phone = models.CharField(max_length=32, unique=True, verbose_name='手机号')
+    email = models.EmailField(unique=True, verbose_name='邮箱')
+    password = models.CharField(max_length=256, verbose_name='密码')
     school = models.CharField(max_length=256, verbose_name='所在学校')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
-    update_time = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+
+    def __str__(self):
+        return self.name
 
     class Meta:
-        ordering = ['name']
+        ordering = ['create_time']
         verbose_name = '用户'
 
 
-class Recon(BaseModel):
-    recon_id = models.uuid(verbose_name='重建id')
-    user_id = models.uuid(verbose_name='创建用户id')
+class Recon(models.Model):
+    recon_id = models.AutoField(primary_key=True, editable=False, verbose_name='重建id')
+    user_id = models.UUIDField(primary_key=False, default=uuid.uuid4, editable=False, verbose_name='创建用户id')
 
     recon_progress = models.FloatField(verbose_name='重建进度')
     image_path = models.CharField(max_length=256, verbose_name='图片路径')
@@ -70,9 +65,11 @@ class Recon(BaseModel):
     texture_path = models.CharField(max_length=256, verbose_name='纹理重建存储路径')
     
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
-    update_time = models.DateTimeField(auto_now=True, verbose_name='更新时间')
+    
+    def __str__(self):
+        return self.recon_id
 
     class Meta:
-        ordering = ['user_id','recon_progress']
+        ordering = ['create_time']
         verbose_name = '重建任务'
     

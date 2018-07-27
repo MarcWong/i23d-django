@@ -36,7 +36,7 @@ function loadPly(){
 
             mesh.castShadow = false;
             mesh.receiveShadow = false;
-
+            console.log(mesh);
             scene.add( mesh );
 
         });
