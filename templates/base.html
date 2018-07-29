@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,10 +21,21 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    {% block js_three %}{% endblock %}
+    <script src="{% static 'js/three.js' %}"></script>
+    <script src="{% static 'js/Detector.js' %}"></script>
+    <script src="{% static 'js/OrbitControls.js' %}"></script>
+    <script src="{% static 'js/TransformControls.js' %}"></script>
+    <script src="{% static 'js/DDSLoader.js' %}"></script>
+    <script src="{% static 'js/OBJLoader.js' %}"></script>
+    <script src="{% static 'js/MTLLoader.js' %}"></script>
+    <script src="{% static 'js/PLYLoader.js' %}"></script>
 
-    <link href="/static/css/resetcss.css" rel="stylesheet">
-    <link href="/static/css/gil.css" rel="stylesheet">
+    <!--stat.js-->
+    <script src="{% static 'js/stats.min.js' %}"></script>
+
+    <link href="{% static 'css/resetcss.css' %}" rel="stylesheet">
+    <link href="{% static 'css/gil.css' %}" rel="stylesheet">
+    
     <style>
     .bg{
         background: #0d407a url(/static/img/bg.png) no-repeat top right;
@@ -37,7 +49,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
             <a class="navbar-brand" href="http://www.pku.edu.cn/">
-                <img alt="Brand" width="300" style=" margin-top:-8px;"                    src="/static/img/lablogo_white.png">
+                <img alt="Brand" width="300" style=" margin-top:-8px;" src="/static/img/lablogo_white.png">
             </a>
             </div>
         

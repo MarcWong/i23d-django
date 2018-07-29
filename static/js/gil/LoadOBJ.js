@@ -25,7 +25,8 @@ function loadObj(mode){
     new THREE.MTLLoader()
         .setPath( path + 'obj/male02/' )
         .load( 'male02_dds.mtl', function ( materials ) {
-
+        // .setPath( path + 'obj/i23d/' )
+        // .load( 'test.mtl', function ( materials ) {
             materials.preload();
 
             switch(mode){
@@ -33,13 +34,13 @@ function loadObj(mode){
                     break;
                 case 1:
                     for(var m1 in materials.materials){
-                        console.log(materials.materials[m1])
+                        console.log(materials.materials[m1]);
                         materials.materials[m1].map = null;
                     }
                     break;
                 case 2:
                     for(var m2 in materials.materials){
-                        console.log(materials.materials[m2])
+                        console.log(materials.materials[m2]);
                         materials.materials[m2].map = null;
                         materials.materials[m2].wireframe = true;
                     }
@@ -54,6 +55,8 @@ function loadObj(mode){
                 .setMaterials( materials )
                 .setPath( path + 'obj/male02/' )
                 .load( 'male02.obj', function ( object ) {
+                // .setPath( path + 'obj/i23d/' )
+                // .load( 'test.obj', function ( object ) {
                     $("#progress").css('visibility','hidden');
                     
                     object.position.y = - 95;
