@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^login/', views.login),
     url(r'^register/', views.register),
     url(r'^logout/', views.logout),
+    url(r'^reset/', views.reset),
     #3D Viewers
     url(r'^obj/', views.obj),
     url(r'^ply/', views.ply),

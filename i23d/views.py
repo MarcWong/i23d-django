@@ -10,6 +10,42 @@ import forms,models
 def index(request):
     return render(request, "index.html")
 
+def reset(request):
+    if request.method == "POST":
+        register_form = forms.RegisterForm(request.POST)
+        message = "请检查填写的内容！"
+        if register_form.is_valid():  # 获取数据
+            username = register_form.cleaned_data['username']
+            password1 = register_form.cleaned_data['password1']
+            password2 = register_form.cleaned_data['password2']
+            email = register_form.cleaned_data['email']
+            phone = register_form.cleaned_data['phone']
+            if password1 != password2:  # 判断两次密码是否相同
+                message = "两次输入的密码不同！"
+                return render(request, 'login/register.html', locals())
+            else:
+                same_name_user = models.User.objects.filter(name=username)
+
+                same_email_user = models.User.objects.filter(email=email)
+
+                same_phone_user = models.User.objects.filter(phone=phone)
+
+                if same_name_user and same_email_user and same_phone_user:  # 此用户信息全对，重设此密码
+                    same_phone_user.password = password1
+                    return redirect('/login/')  # 自动跳转到登录页面
+                else:
+                    message = '该邮箱地址已被注册，请使用别的邮箱！'
+                    return render(request, 'login/register.html', locals())
+                
+    register_form = forms.RegisterForm()
+    return render(request, 'login/reset.html', locals())
+
+def obj(request):
+    return render(request, "obj.html")
+
+def ply(request):
+    return render(request, "ply.html")
+
 def login(request):
     if request.session.get('is_login',None):
         return redirect("/index/")
@@ -87,8 +123,3 @@ def logout(request):
     # del request.session['user_id']
     # del request.session['user_name']
     return redirect("/index/")
-def obj(request):
-    return render(request, "obj.html")
-
-def ply(request):
-    return render(request, "ply.html")
