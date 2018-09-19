@@ -7,16 +7,16 @@ function onKeyboardEvent(e) {
         toggleLight()
         break;
     case 'KeyW':
-        meshTilt()
+        meshTilt(0.52359877)
         break;
     case 'KeyS':
-        meshTilt()
+        meshTilt(-0.52359877)
         break;
     case 'KeyA':
-        meshRotate(1.57)
+        meshRotate(1.5707963)
         break;
     case 'KeyD':
-        meshRotate(-1.57)
+        meshRotate(-1.5707963)
         break;
     case 'KeyM':
         toggleMenu()
