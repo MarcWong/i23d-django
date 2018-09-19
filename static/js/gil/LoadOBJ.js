@@ -21,10 +21,10 @@ function loadObj(mode){
   THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
   new THREE.MTLLoader()
-    // .setPath( path + 'obj/male02/' )
-    // .load( 'male02_dds.mtl', function ( materials ) {
-    .setPath( path + 'obj/i23d/' )
-    .load( 'scene_dense_mesh_refine_texture.mtl', function ( materials ) {
+    .setPath( path + 'obj/male02/' )
+    .load( 'male02_dds.mtl', function ( materials ) {
+    // .setPath( path + 'obj/i23d/' )
+    // .load( 'scene_dense_mesh_refine_texture.mtl', function ( materials ) {
       materials.preload();
 
       switch(mode){
@@ -48,14 +48,14 @@ function loadObj(mode){
       }
       new THREE.OBJLoader()
         .setMaterials( materials )
-        // .setPath( path + 'obj/male02/' )
-        // .load( 'male02.obj', function ( object ) {
-        .setPath( path + 'obj/i23d/' )
-        .load( 'scene_dense_mesh_refine_texture.obj', function ( object ) {
+        .setPath( path + 'obj/male02/' )
+        .load( 'male02.obj', function ( object ) {
+        // .setPath( path + 'obj/i23d/' )
+        // .load( 'scene_dense_mesh_refine_texture.obj', function ( object ) {
           $("#progress").css('visibility','hidden');
           console.log(object);
           object.position.x = 0;
-          object.position.y = 0;
+          object.position.y = -95;
           object.position.z = 0;
           mesh = object;
           scene.add( object );
