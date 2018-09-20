@@ -61,9 +61,12 @@ function loadObj(mode){
           object.scale.y = 100;
           object.scale.z = 100;
 
-          object.children[0].geometry.computeBoundingBox();
+          if (object.children.length === 1) {
+            object.children[0].geometry.computeBoundingBox();
+            object.children[0].geometry.center();
+          }
           // object.rotation.x = THREE.Math.degToRad( 90 );
-          object.children[0].geometry.center();
+
           let helper = new THREE.BoundingBoxHelper(object, 0xff0000);
           helper.update();
           scene.add(helper);
