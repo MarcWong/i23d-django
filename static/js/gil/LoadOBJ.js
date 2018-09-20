@@ -21,26 +21,28 @@ function loadObj(mode){
   THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
   new THREE.MTLLoader()
-    .setPath( path + 'obj/male02/' )
-    .load( 'male02_dds.mtl', function ( materials ) {
-    // .setPath( path + 'obj/i23d/' )
-    // .load( 'scene_dense_mesh_refine_texture.mtl', function ( materials ) {
+    // .setPath( path + 'obj/male02/' )
+    // .load( 'male02_dds.mtl', function ( materials ) {
+    .setPath( path + 'obj/i23d/' )
+    .load( 'scene_dense_mesh_refine_texture.mtl', function ( materials ) {
       materials.preload();
 
       switch(mode){
         case 0:
           break;
         case 1:
-          for(var m1 in materials.materials){
-              console.log(materials.materials[m1]);
-              materials.materials[m1].map = null;
+          for (let m1 in materials){
+            for (let mm1 in m1) {
+              m1[mm1].map = null;
+            }
           }
           break;
         case 2:
-          for(var m2 in materials.materials){
-              console.log(materials.materials[m2]);
-              materials.materials[m2].map = null;
-              materials.materials[m2].wireframe = true;
+          for (let m2 in materials){
+            for (let mm2 in m2) {
+              m2[mm2].map = null;
+              m2[mm2].wireframe = true;
+            }
           }
           break;
         default:
@@ -48,15 +50,23 @@ function loadObj(mode){
       }
       new THREE.OBJLoader()
         .setMaterials( materials )
-        .setPath( path + 'obj/male02/' )
-        .load( 'male02.obj', function ( object ) {
-        // .setPath( path + 'obj/i23d/' )
-        // .load( 'scene_dense_mesh_refine_texture.obj', function ( object ) {
+        // .setPath( path + 'obj/male02/' )
+        // .load( 'male02.obj', function ( object ) {
+        .setPath( path + 'obj/i23d/' )
+        .load( 'scene_dense_mesh_refine_texture.obj', function ( object ) {
           $("#progress").css('visibility','hidden');
           console.log(object);
-          object.position.x = 0;
-          object.position.y = -95;
-          object.position.z = 0;
+
+          object.scale.x = 100;
+          object.scale.y = 100;
+          object.scale.z = 100;
+
+          object.children[0].geometry.computeBoundingBox();
+          // object.rotation.x = THREE.Math.degToRad( 90 );
+          object.children[0].geometry.center();
+          let helper = new THREE.BoundingBoxHelper(object, 0xff0000);
+          helper.update();
+          scene.add(helper);
           mesh = object;
           scene.add( object );
           autoRotate(true);
