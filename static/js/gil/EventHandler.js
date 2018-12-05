@@ -41,7 +41,7 @@ function dblclickEvent(e){
 function onMouseDownEvent(e) {
     e.preventDefault();
     console.log('mouse down');
-    autoRotate(false);
+    // autoRotate(false);
 
     mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -87,6 +87,6 @@ function onMouseDownEvent(e) {
 }
 function onMouseUpEvent() {
     console.log('mouse up');
-    autoRotate(true);
+    // autoRotate(true);
 }
 
